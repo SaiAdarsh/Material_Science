@@ -1,0 +1,588 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Periodic Table of HTML elements</title>
+        <style>
+        html {
+  background: #787878;
+  /* Old browsers */
+  background: radial-gradient(ellipse at center, #454545 0%, #787878 100%);
+  background-size: cover;
+  height: 100%;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+body {
+  width: 90%;
+  width: 90vw;
+  margin: 1vh auto;
+  color: black; }
+   
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #FFF; }
+  .element {
+  display: none; }
+  .key {
+  display: none; }
+
+  @media screen and (min-width: 600px) {
+  .row {
+    display: flex;
+    text-align: center;
+    height: 6vmin;
+    justify-content: space-around; }
+  .f-block .row {
+    align-content: space-around;}
+  .element {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    flex: auto;
+    color: black;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin: 1px;
+    text-decoration: none; }
+  .description {
+    display: none; }
+  .description:target {
+    display: block; }
+  .key {
+    display: block;
+    padding: 0;
+    width: 60%;
+    max-width: 650px;
+    list-style-type: none;
+    color: #fff;
+    line-height: 1.8;
+    font-weight: normal; }
+  .key li {
+    display: inline-block;
+    margin: 0 .2rem;
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer; }
+  .key li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 16px;
+    height: 16px; } }
+
+    .description {
+  padding: 1em;
+  margin: 2em 0;
+  text-overflow: ellipsis; }
+  .description h2 {
+    margin: 0; }
+  .description a {
+    color: #1d2441;
+    text-decoration: none; }
+  .description a:visited {
+    color: #3C4C88; }
+  .description a:hover, .description a:focus {
+    color: #3C4C88;
+    text-decoration: underline; }
+  .description .moz-link {
+    padding-left: 24px;
+    position: relative;
+    display: block;
+    background: url("moz.png") no-repeat left center;
+    word-break: break-word; }
+
+.element.group-base {
+  background-color: #d48489; }
+  .element.group-base:hover {
+    background-color: #e1aaad; }
+
+.description.group-base {
+  background-color: rgba(225, 170, 173, 0.5); }
+  .description.group-base:hover {
+    background-color: rgba(212, 132, 137, 0.8); }
+
+.key li.group-base:before {
+  background-color: #d48489; }
+
+.hover-group-base .element {
+  opacity: .5; }
+
+.hover-group-base .element.group-base {
+  opacity: 1; }
+
+.element.group-metadata {
+  background-color: #d49384; }
+  .element.group-metadata:hover {
+    background-color: #e1b4aa; }
+
+.description.group-metadata {
+  background-color: rgba(225, 180, 170, 0.5); }
+  .description.group-metadata:hover {
+    background-color: rgba(212, 147, 132, 0.8); }
+
+.key li.group-metadata:before {
+  background-color: #d49384; }
+
+.hover-group-metadata .element {
+  opacity: .5; }
+
+.hover-group-metadata .element.group-metadata {
+  opacity: 1; }
+
+.element.group-sectioning {
+  background-color: #d4a784; }
+  .element.group-sectioning:hover {
+    background-color: #e1c2aa; }
+
+.description.group-sectioning {
+  background-color: rgba(225, 194, 170, 0.5); }
+  .description.group-sectioning:hover {
+    background-color: rgba(212, 167, 132, 0.8); }
+
+.key li.group-sectioning:before {
+  background-color: #d4a784; }
+
+.hover-group-sectioning .element {
+  opacity: .5; }
+
+.hover-group-sectioning .element.group-sectioning {
+  opacity: 1; }
+
+.element.group-text-content {
+  background-color: #d4bb84; }
+  .element.group-text-content:hover {
+    background-color: #e1d0aa; }
+
+.description.group-text-content {
+  background-color: rgba(225, 208, 170, 0.5); }
+  .description.group-text-content:hover {
+    background-color: rgba(212, 187, 132, 0.8); }
+
+.key li.group-text-content:before {
+  background-color: #d4bb84; }
+
+.hover-group-text-content .element {
+  opacity: .5; }
+
+.hover-group-text-content .element.group-text-content {
+  opacity: 1; }
+
+.element.group-text-semantics {
+  background-color: #d4cf84; }
+  .element.group-text-semantics:hover {
+    background-color: #e1deaa; }
+
+.description.group-text-semantics {
+  background-color: rgba(225, 222, 170, 0.5); }
+  .description.group-text-semantics:hover {
+    background-color: rgba(212, 207, 132, 0.8); }
+
+.key li.group-text-semantics:before {
+  background-color: #d4cf84; }
+
+.hover-group-text-semantics .element {
+  opacity: .5; }
+
+.hover-group-text-semantics .element.group-text-semantics {
+  opacity: 1; }
+
+.element.group-media {
+  background-color: #c5d484; }
+  .element.group-media:hover {
+    background-color: #d7e1aa; }
+
+.description.group-media {
+  background-color: rgba(215, 225, 170, 0.5); }
+  .description.group-media:hover {
+    background-color: rgba(197, 212, 132, 0.8); }
+
+.key li.group-media:before {
+  background-color: #c5d484; }
+
+.hover-group-media .element {
+  opacity: .5; }
+
+.hover-group-media .element.group-media {
+  opacity: 1; }
+
+.element.group-embedded {
+  background-color: #b1d484; }
+  .element.group-embedded:hover {
+    background-color: #c9e1aa; }
+
+.description.group-embedded {
+  background-color: rgba(201, 225, 170, 0.5); }
+  .description.group-embedded:hover {
+    background-color: rgba(177, 212, 132, 0.8); }
+
+.key li.group-embedded:before {
+  background-color: #b1d484; }
+
+.hover-group-embedded .element {
+  opacity: .5; }
+
+.hover-group-embedded .element.group-embedded {
+  opacity: 1; }
+
+.element.group-script {
+  background-color: #9dd484; }
+  .element.group-script:hover {
+    background-color: #bbe1aa; }
+
+.description.group-script {
+  background-color: rgba(187, 225, 170, 0.5); }
+  .description.group-script:hover {
+    background-color: rgba(157, 212, 132, 0.8); }
+
+.key li.group-script:before {
+  background-color: #9dd484; }
+
+.hover-group-script .element {
+  opacity: .5; }
+
+.hover-group-script .element.group-script {
+  opacity: 1; }
+
+.element.group-edits {
+  background-color: #89d484; }
+  .element.group-edits:hover {
+    background-color: #ade1aa; }
+
+.description.group-edits {
+  background-color: rgba(173, 225, 170, 0.5); }
+  .description.group-edits:hover {
+    background-color: rgba(137, 212, 132, 0.8); }
+
+.key li.group-edits:before {
+  background-color: #89d484; }
+
+.hover-group-edits .element {
+  opacity: .5; }
+
+.hover-group-edits .element.group-edits {
+  opacity: 1; }
+
+.element.group-table {
+  background-color: #84d493; }
+  .element.group-table:hover {
+    background-color: #aae1b4; }
+
+.description.group-table {
+  background-color: rgba(170, 225, 180, 0.5); }
+  .description.group-table:hover {
+    background-color: rgba(132, 212, 147, 0.8); }
+
+.key li.group-table:before {
+  background-color: #84d493; }
+
+.hover-group-table .element {
+  opacity: .5; }
+
+.hover-group-table .element.group-table {
+  opacity: 1; }
+
+.element.group-forms {
+  background-color: #84d4a7; }
+  .element.group-forms:hover {
+    background-color: #aae1c2; }
+
+.description.group-forms {
+  background-color: rgba(170, 225, 194, 0.5); }
+  .description.group-forms:hover {
+    background-color: rgba(132, 212, 167, 0.8); }
+
+.key li.group-forms:before {
+  background-color: #84d4a7; }
+
+.hover-group-forms .element {
+  opacity: .5; }
+
+.hover-group-forms .element.group-forms {
+  opacity: 1; }
+
+.element.group-interactive {
+  background-color: #84d4bb; }
+  .element.group-interactive:hover {
+    background-color: #aae1d0; }
+
+.description.group-interactive {
+  background-color: rgba(170, 225, 208, 0.5); }
+  .description.group-interactive:hover {
+    background-color: rgba(132, 212, 187, 0.8); }
+
+.key li.group-interactive:before {
+  background-color: #84d4bb; }
+
+.hover-group-interactive .element {
+  opacity: .5; }
+
+.hover-group-interactive .element.group-interactive {
+  opacity: 1; }
+
+.element.group-web-components {
+  background-color: #84d4cf; }
+  .element.group-web-components:hover {
+    background-color: #aae1de; }
+
+.description.group-web-components {
+  background-color: rgba(170, 225, 222, 0.5); }
+  .description.group-web-components:hover {
+    background-color: rgba(132, 212, 207, 0.8); }
+
+.key li.group-web-components:before {
+  background-color: #84d4cf; }
+
+.hover-group-web-components .element {
+  opacity: .5; }
+
+.hover-group-web-components .element.group-web-components {
+  opacity: 1; }
+        </style>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    
+    <script>function myFunction(val) {
+     
+      if(document.getElementById("demo").value){
+      document.getElementById("demo").value = document.getElementById("demo").value+'-'+val;}
+      else{
+        document.getElementById("demo").value = val;
+      }
+    }
+    
+    $(document).ready(function() {
+  $('#hit').click(function() {
+    
+    console.log($('#demo').val());
+    $.getJSON("https://www.materialsproject.org/rest/v1/materials/"+$('#demo').val()+"/vasp?API_KEY=TvEZMpcNjdWnOlRVIZfa", function(jd) {
+      console.log(jd);
+      var employee_data = '';
+      $.each(jd.response, function(key, value){
+          employee_data += '<tr>';
+          employee_data += '<td>'+value.full_formula+'</td>';
+          employee_data += '<td>'+value.material_id+'</td>';
+          employee_data += '<td>'+value.density+'</td>';
+          employee_data += '</tr>';
+      });
+      $('#employee_table').append(employee_data);
+ });
+  });
+});
+
+    </script>
+	</head>
+	<body data-gr-c-s-loaded="true">
+		<main>
+			<h1>Periodic table of HTML elements</h1>
+			<div class="elements">
+	<div class="row">
+		<a href="javascript:myFunction('H');"  class="element group-base"><span>H</span></a>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<a href="javascript:myFunction('He');" class="element group-forms"><span>He</span></a>
+	</div>
+	<div class="row">
+		<a href="javascript:myFunction('Li');" class="element group-metadata"><span>Li</span></a>
+		<a href="javascript:myFunction('Be');" class="element group-sectioning"><span>Be</span></a>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<a href="javascript:myFunction('B');" class="element group-text-semantics"><span>B</span></a>
+		<a href="javascript:myFunction('C');" class="element group-media"><span>C</span></a>
+		<a href="javascript:myFunction('N');" class="element group-embedded"><span>N</span></a>
+		<a href="javascript:myFunction('O');" class="element group-table"><span>O</span></a>
+		<a href="javascript:myFunction('F');" class="element group-forms"><span>F</span></a>
+		<a href="javascript:myFunction('Ne');" class="element group-forms"><span>Ne</span></a>
+	</div>
+	<div class="row">
+		<a href="javascript:myFunction('Na');" class="element group-metadata"><span>Na</span></a>
+		<a href="javascript:myFunction('Mg');" class="element group-sectioning"><span>Mg</span></a>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<a href="javascript:myFunction('Al');" class="element group-text-semantics"><span>Al</span></a>
+		<a href="javascript:myFunction('Si');" class="element group-media"><span>Si</span></a>
+		<a href="javascript:myFunction('P');" class="element group-embedded"><span>P</span></a>
+		<a href="javascript:myFunction('S');" class="element group-table"><span>S</span></a>
+		<a href="javascript:myFunction('Cl');" class="element group-table"><span>Cl</span></a>
+		<a href="javascript:myFunction('Ar');" class="element group-forms"><span>Ar</span></a>
+	</div>
+	<div class="row">
+		<a href="javascript:myFunction('K');" class="element group-metadata"><span>K</span></a>
+		<a href="javascript:myFunction('Ca');" class="element group-sectioning"><span>Ca</span></a>
+		<a href="javascript:myFunction('Sc');" class="element group-text-content"><span>Sc</span></a>
+		<a href="javascript:myFunction('Ti');" class="element group-text-content"><span>Ti</span></a>
+		<a href="javascript:myFunction('V');" class="element group-text-semantics"><span>V</span></a>
+		<a href="javascript:myFunction('Cr');" class="element group-text-semantics"><span>Cr</span></a>
+		<a href="javascript:myFunction('Mn');" class="element group-text-semantics"><span>Mn</span></a>
+		<a href="javascript:myFunction('Fe');" class="element group-text-semantics"><span>Fe</span></a>
+		<a href="javascript:myFunction('Co');" class="element group-text-semantics"><span>Co</span></a>
+		<a href="javascript:myFunction('Ni');" class="element group-media"><span>Ni</span></a>
+		<a href="javascript:myFunction('Cu');" class="element group-script"><span>Cu</span></a>
+		<a href="javascript:myFunction('Zn');" class="element group-table"><span>Zn</span></a>
+		<a href="javascript:myFunction('Ga');" class="element group-table"><span>Ga</span></a>
+		<a href="javascript:myFunction('Ge');" class="element group-forms"><span>Ge</span></a>
+		<a href="javascript:myFunction('As');" class="element group-interactive"><span>As</span></a>
+		<a href="javascript:myFunction('Se');" class="element group-interactive"><span>Se</span></a>
+		<a href="javascript:myFunction('Br');" class="element group-interactive"><span>Br</span></a>
+		<a href="javascript:myFunction('Kr');" class="element group-interactive"><span>Kr</span></a>
+  </div>
+  <div class="row">
+		<a href="javascript:myFunction('Rb');" class="element group-metadata"><span>Rb</span></a>
+		<a href="javascript:myFunction('Sr');" class="element group-sectioning"><span>Sr</span></a>
+		<a href="javascript:myFunction('Y');" class="element group-text-content"><span>Y</span></a>
+		<a href="javascript:myFunction('Zr');" class="element group-text-content"><span>Zr</span></a>
+		<a href="javascript:myFunction('Nb');" class="element group-text-semantics"><span>Nb</span></a>
+		<a href="javascript:myFunction('Mo');" class="element group-text-semantics"><span>Mo</span></a>
+		<a href="javascript:myFunction('Tc');" class="element group-text-semantics"><span>Tc</span></a>
+		<a href="javascript:myFunction('Ru');" class="element group-text-semantics"><span>Ru</span></a>
+		<a href="javascript:myFunction('Rh');" class="element group-text-semantics"><span>Rh</span></a>
+    <a href="javascript:myFunction('Pd');" class="element group-media"><span>Pd</span></a>
+    <a href="javascript:myFunction('Ag');" class="element group-interactive"><span>Ag</span></a>
+		<a href="javascript:myFunction('Cd');" class="element group-script"><span>Cd</span></a>
+		<a href="javascript:myFunction('In');" class="element group-table"><span>In</span></a>
+		<a href="javascript:myFunction('Sn');" class="element group-table"><span>Sn</span></a>
+		<a href="javascript:myFunction('Sb');" class="element group-forms"><span>Sb</span></a>
+		<a href="javascript:myFunction('Te');" class="element group-interactive"><span>Te</span></a>
+		<a href="javascript:myFunction('I');" class="element group-interactive"><span>I</span></a>
+		<a href="javascript:myFunction('Xe');" class="element group-interactive"><span>Xe</span></a>
+		
+  </div>
+
+  <div class="row">
+		<a href="javascript:myFunction('Cs');" class="element group-metadata"><span>Cs</span></a>
+		<a href="javascript:myFunction('Ba');" class="element group-sectioning"><span>Ba</span></a>
+		<a href="javascript:myFunction('La-Lu');" class="element group-text-content"><span>La-Lu</span></a>
+		<a href="javascript:myFunction('Hf');" class="element group-text-content"><span>Hf</span></a>
+		<a href="javascript:myFunction('Ta');" class="element group-text-semantics"><span>Ta</span></a>
+		<a href="javascript:myFunction('W');" class="element group-text-semantics"><span>W</span></a>
+		<a href="javascript:myFunction('Re');" class="element group-text-semantics"><span>Re</span></a>
+		<a href="javascript:myFunction('Os');" class="element group-text-semantics"><span>Os</span></a>
+		<a href="javascript:myFunction('Ir');" class="element group-text-semantics"><span>Ir</span></a>
+    <a href="javascript:myFunction('Pt');" class="element group-media"><span>Pt</span></a>
+    <a href="javascript:myFunction('Au');" class="element group-interactive"><span>Au</span></a>
+		<a href="javascript:myFunction('Hg');" class="element group-script"><span>Hg</span></a>
+		<a href="javascript:myFunction('Tl');" class="element group-table"><span>Tl</span></a>
+		<a href="javascript:myFunction('Pb');" class="element group-table"><span>Pb</span></a>
+		<a href="javascript:myFunction('Bi');" class="element group-forms"><span>Bi</span></a>
+		<a href="javascript:myFunction('Po');" class="element group-interactive"><span>Po</span></a>
+		<a href="javascript:myFunction('At');" class="element group-interactive"><span>At</span></a>
+		<a href="javascript:myFunction('Rn');" class="element group-interactive"><span>Rn</span></a>
+		
+	</div>
+
+	<div class="row">
+		<a href="javascript:myFunction('fr');" class="element group-sectioning"><span>fr</span></a>
+		<a href="javascript:myFunction('Ra');" class="element group-text-content"><span>Ra</span></a>
+		<a href="javascript:myFunction('Ac-Lr');" class="element group-text-content"><span>Ac-Lr</span></a>
+		<a href="javascript:myFunction('Rf');" class="element group-text-semantics"><span>Rf</span></a>
+    <a href="javascript:myFunction('Db');" class="element group-sectioning"><span>Db</span></a>
+		<a href="javascript:myFunction('Sg');" class="element group-text-content"><span>Sg</span></a>
+		<a href="javascript:myFunction('Bh');" class="element group-text-content"><span>Bh</span></a>
+    <a href="javascript:myFunction('Hs');" class="element group-text-semantics"><span>Hs</span></a>
+    <a href="javascript:myFunction('Mt');" class="element group-sectioning"><span>Mt</span></a>
+		<a href="javascript:myFunction('Ds');" class="element group-text-content"><span>Ds</span></a>
+		<a href="javascript:myFunction('Rg');" class="element group-text-content"><span>Rg</span></a>
+		<a href="javascript:myFunction('Cn');" class="element group-text-semantics"><span>Cn</span></a>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+		<div class="element empty-element"></div>
+  </div>
+  <br><br>
+<div class="row">
+    <div class="element empty-element"></div>
+    <div class="element empty-element"></div>
+  <a href="javascript:myFunction('La');" class="element group-sectioning"><span>La</span></a>
+  <a href="javascript:myFunction('Ce');" class="element group-text-content"><span>Ce</span></a>
+  <a href="javascript:myFunction('Pr');" class="element group-text-content"><span>Pr</span></a>
+  <a href="javascript:myFunction('Nd');" class="element group-text-semantics"><span>Nd</span></a>
+  <a href="javascript:myFunction('Pm');" class="element group-sectioning"><span>Pm</span></a>
+  <a href="javascript:myFunction('Sm');" class="element group-text-content"><span>Sm</span></a>
+  <a href="javascript:myFunction('Eu');" class="element group-text-content"><span>Eu</span></a>
+  <a href="javascript:myFunction('Gd');" class="element group-text-semantics"><span>Gd</span></a>
+  <a href="javascript:myFunction('Tb');" class="element group-sectioning"><span>Tb</span></a>
+  <a href="javascript:myFunction('Dy');" class="element group-text-content"><span>Dy</span></a>
+  <a href="javascript:myFunction('Ho');" class="element group-text-content"><span>Ho</span></a>
+  <a href="javascript:myFunction('Er');" class="element group-text-semantics"><span>Er</span></a>
+  <a href="javascript:myFunction('Tm');" class="element group-text-content"><span>Tm</span></a>
+  <a href="javascript:myFunction('Yb');" class="element group-text-content"><span>Yb</span></a>
+  <a href="javascript:myFunction('Lu');" class="element group-text-semantics"><span>Lu</span></a>
+  <div class="element empty-element"></div>
+</div>
+<div class="row">
+    <div class="element empty-element"></div>
+    <div class="element empty-element"></div>
+  <a href="javascript:myFunction('Ac');" class="element group-sectioning"><span>Ac</span></a>
+  <a href="javascript:myFunction('Th');" class="element group-text-content"><span>Th</span></a>
+  <a href="javascript:myFunction('Pa');" class="element group-text-content"><span>Pa</span></a>
+  <a href="javascript:myFunction('U');" class="element group-text-semantics"><span>U</span></a>
+  <a href="javascript:myFunction('Np');" class="element group-sectioning"><span>Np</span></a>
+  <a href="javascript:myFunction('Pu');" class="element group-text-content"><span>Pu</span></a>
+  <a href="javascript:myFunction('Am');" class="element group-text-content"><span>Am</span></a>
+  <a href="javascript:myFunction('Cm');" class="element group-text-semantics"><span>Cm</span></a>
+  <a href="javascript:myFunction('Bk');" class="element group-sectioning"><span>Bk</span></a>
+  <a href="javascript:myFunction('Cf');" class="element group-text-content"><span>Cf</span></a>
+  <a href="javascript:myFunction('Es');" class="element group-text-content"><span>Es</span></a>
+  <a href="javascript:myFunction('Fm');" class="element group-text-semantics"><span>Fm</span></a>
+  <a href="javascript:myFunction('Md');" class="element group-text-content"><span>Md</span></a>
+  <a href="javascript:myFunction('No');" class="element group-text-content"><span>No</span></a>
+  <a href="javascript:myFunction('Lr');" class="element group-text-semantics"><span>Lr</span></a>
+  <div class="element empty-element"></div>
+</div>
+</div>
+
+<div id="search">
+  <input id="demo" type="text" placeholder="Na-H" />
+  <button id="hit" type="button" name="">Search</button>
+</div>
+
+<table class="table table-bordered table-striped" id="employee_table">
+  <tr>
+    <th>Formula</th>
+    <th>material_id</th>
+    <th>Density</th>
+
+  </tr>
+
+</table>
+
+</main>
+</body></html>
+{% endblock content %}
